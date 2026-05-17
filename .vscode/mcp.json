@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "mrdjDevSuite": {
+      "command": "node",
+      "args": [
+        "F:\\SoftwareDev\\mrdj-dev-suite\\packages\\mcp-server\\dist\\index.js"
+      ]
+    }
+  }
+}

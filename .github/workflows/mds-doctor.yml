@@ -1,0 +1,37 @@
+name: MDS Doctor
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  doctor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run Doctor (gated)
+        uses: DavidJGrimsley/doctor-action@v1
+        with:
+          project-path: .
+          mode: ci
+          run-scripts: "true"
+          min-score: "90"
+          suite-repo: DavidJGrimsley/mrdj-dev-suite
+          suite-ref: phase10-doctor-action
+
